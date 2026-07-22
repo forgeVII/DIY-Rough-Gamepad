@@ -5,13 +5,13 @@
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Version](https://img.shields.io/badge/Version-v1-orange)
 
-> A handmade USB HID HOTAS (Hands On Throttle-And-Stick) gamepad built from scratch using STM32F103C8T6 "Blue Pill", PS2 joystick modules, and 12 tactile buttons. Tested and working in real games.
+> A handmade USB HID gamepad and reusable test pad built from scratch using STM32F103C8T6 "Blue Pill", PS2 joystick modules, and 12 tactile buttons. Tested and working in real games.
 
 ---
 
 ## Why I Built This
 
-I wanted to build a custom gamepad for flight simulation and FPS games while learning STM32 peripherals — ADC, GPIO, USB HID, and more. It started as a hobby project and turned into a fully functional controller that I now use daily.
+I needed a reusable gamepad and test pad for my STM32 projects — something I can use for flight sims, FPS games, and future experiments without rewiring buttons, joysticks, and pots on a breadboard every time. It started as a hobby project and turned into a fully functional controller that I use daily.
 
 It looks rough, it's been used hard, and the paint is worn — but it works. Tested in:
 
@@ -210,7 +210,7 @@ Version 2 will be a complete redesign using **ESP32-S3** with:
 | Better enclosure design | Planned |
 | OLED status display | Planned |
 | RGB LED indicators | Planned |
-| Multi-mode (gamepad / HOTAS / flight) | Planned |
+| Multi-mode (gamepad / flight / custom) | Planned |
 | IR remote control (TV/STB) | Planned |
 
 ---
