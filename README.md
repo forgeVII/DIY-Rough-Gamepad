@@ -142,28 +142,15 @@ firmware/
 
 ## Photos
 
-> Add your photos here — place them in the `photos/` folder and reference them:
-
-```
-![Internal Mechanism](photos/internal.jpg)
-![Wiring Close-up](photos/wiring.jpg)
-![Assembled Front](photos/front.jpg)
-![Assembled Back](photos/back.jpg)
-![In Use](photos/in-use.jpg)
-```
-
----
+![Design](photos/Design.jpg)
+![Electronics](photos/Electonics.jpg)
 
 ## Videos
 
-> Add your videos here — place them in the `videos/` folder or link YouTube:
-
-```
-![Gamepad Tester Demo](videos/gamepad-tester.mp4)
-![Sniper Ghost Warrior 3 Gameplay](videos/sgw3-gameplay.mp4)
-![War Thunder Flight](videos/warthunder-flight.mp4)
-![Construction Timelapse](videos/build-timelapse.mp4)
-```
+- [Gamepad Tester Demo](videos/Gamepad%20tester.mp4) — Browser HID test showing all axes and buttons
+- [Rough Look](videos/Rough%20Look.mp4) — Close-up of the worn build
+- [Trigger Test](videos/Trigger.mp4) — Analog trigger testing
+- [Gameplay Testing](videos/testing%20Game.mp4) — In-game testing
 
 ---
 
