@@ -30,12 +30,13 @@ It looks rough, it's been used hard, and the paint is worn — but it works. Tes
 | Component | Qty | Description |
 |-----------|-----|-------------|
 | STM32F103C8T6 "Blue Pill" | 1 | Main MCU, 72MHz, 64KB Flash, 20KB RAM |
-| PS2 Joystick Module (KY-023) | 2 | Analog dual-axis potentiometers |
+| PS2 Joystick Module (KY-023) | 2 | Cheap/basic analog dual-axis potentiometers |
 | Tactile Push Buttons (6mm) | 12 | Momentary switches for digital inputs |
 | USB Connector | 1 | Micro-USB or USB-C (board dependent) |
 | ST-Link V2 | 1 | For flashing firmware |
-| 10kΩ Resistors | 12 | Pull-up for buttons |
 | Hookup Wire | - | For connections |
+
+> **Note:** Buttons use the STM32's internal pull-ups (no external resistors needed). Cheap PS2 joystick modules tend to drift — per-axis calibration in firmware fixes this.
 
 ### Pin Mapping
 
@@ -144,6 +145,8 @@ firmware/
 
 ![Design](photos/Design.jpg)
 ![Electronics](photos/Electonics.jpg)
+![Rough Image](photos/Rough%20image.jpg)
+![Rough Image 2](photos/Rough%20image%202.jpg)
 
 ## Videos
 
@@ -157,7 +160,7 @@ firmware/
 ## How It Works
 
 1. **ADC Reads** — 6 analog channels from PS2 joystick potentiometers read via12-bit ADC, calibrated per-axis for each physical pot's range
-2. **Button Matrix** — 12 tactile buttons with internal pull-ups, active-low, debounced in hardware via capacitor or software via HAL
+2. **Button Matrix** — 12 tactile buttons using STM32's internal pull-ups, active-low, no external resistors needed
 3. **USB HID** — Raw USB HID gamepad class, 14-byte report sent every 10ms, appears as standard joystick on Windows/Linux
 4. **No Drivers** — Uses USB HID class natively — works out of the box with vJoy, Windows Game Controllers, gamepad-tester.com, and games
 
@@ -179,7 +182,7 @@ I attempted to add an MPU6050 (GY-521) gyro/accelerometer via I2C to add 6 more 
 
 ### Button Sensitivity
 
-Some axes reach max value before the joystick reaches its physical stop. This is due to the PS2 potentiometer's rotation range not matching the joystick's mechanical travel. Calibration values help but are per-unit.
+Some axes reach max value before the joystick reaches its physical stop. This is due to cheap PS2 potentiometer's rotation range not matching the joystick's mechanical travel. Per-axis calibration (min/max + optional reverse) fixes both the range mismatch and center drift common in budget joystick modules.
 
 ---
 
@@ -214,7 +217,7 @@ Version 2 will be a complete redesign using **ESP32-S3** with:
 - Verify 3.3V power to joystick VCC
 
 ### Buttons not responding
-- Check pull-up resistors (10kΩ from each button pin to 3.3V)
+- STM32 internal pull-ups are enabled in firmware — no external resistors needed
 - Verify buttons are wired active-low (pin to GND through button)
 
 ### Device shows Code 10 in Device Manager
