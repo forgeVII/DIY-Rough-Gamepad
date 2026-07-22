@@ -160,13 +160,6 @@ firmware/
 
 ---
 
-## Photos
-
-![Design](photos/Design.jpg)
-![Electronics](photos/Electonics.jpg)
-![Rough Image](photos/Rough%20image.jpg)
-![Rough Image 2](photos/Rough%20image%202.jpg)
-
 ## Videos
 
 ### Build Overview
@@ -180,6 +173,13 @@ firmware/
 
 ### Gameplay Testing
 [![Gameplay Testing](https://img.youtube.com/vi/NsDt_gfPhqs/0.jpg)](https://youtube.com/shorts/NsDt_gfPhqs)
+
+## Photos
+
+![Design](photos/Design.jpg)
+![Electronics](photos/Electonics.jpg)
+![Rough Image](photos/Rough%20image.jpg)
+![Rough Image 2](photos/Rough%20image%202.jpg)
 
 ---
 
