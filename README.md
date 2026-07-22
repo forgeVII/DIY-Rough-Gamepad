@@ -169,10 +169,17 @@ firmware/
 
 ## Videos
 
-- [Gamepad Tester Demo](videos/Gamepad%20tester.mp4) — Browser HID test showing all axes and buttons
-- [Rough Look](videos/Rough%20Look.mp4) — Close-up of the worn build
-- [Trigger Test](videos/Trigger.mp4) — Analog trigger testing
-- [Gameplay Testing](videos/testing%20Game.mp4) — In-game testing
+### Build Overview
+[![Build Overview](https://img.youtube.com/vi/Yqp5RxeJppQ/0.jpg)](https://youtu.be/Yqp5RxeJppQ)
+
+### Gamepad Tester
+[![Gamepad Tester](https://img.youtube.com/vi/HnyjZVwW-kU/0.jpg)](https://youtube.com/shorts/HnyjZVwW-kU)
+
+### Trigger Test
+[![Trigger Test](https://img.youtube.com/vi/2lrAC-Qs9rI/0.jpg)](https://youtube.com/shorts/2lrAC-Qs9rI)
+
+### Gameplay Testing
+[![Gameplay Testing](https://img.youtube.com/vi/NsDt_gfPhqs/0.jpg)](https://youtube.com/shorts/NsDt_gfPhqs)
 
 ---
 
