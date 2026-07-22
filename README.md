@@ -13,7 +13,9 @@
 
 I needed a reusable gamepad and test pad for my STM32 projects — something I can use for flight sims, FPS games, and future experiments without rewiring buttons, joysticks, and pots on a breadboard every time. It started as a hobby project and turned into a fully functional controller that I use daily.
 
-It looks rough, it's been used hard, and the paint is worn — but it works. Tested in:
+It looks rough — but not from heavy use. The finish is rough because this was built with whatever was available: leftover scrap wood from furniture (that would have gone into a bonfire), leftover paint from the workshop, and large furniture tools instead of precision crafting tools. No 3D printer, no professional woodworking tools, no fresh wood. Everything was improvised with what was at hand.
+
+The electronics and firmware are the real focus here. The cosmetic finish is secondary — that's what v2 is for. Tested in:
 
 - **Sniper Ghost Warrior 3** (FPS)
 - **War Thunder** (flight sim)
@@ -51,7 +53,7 @@ It looks rough, it's been used hard, and the paint is worn — but it works. Tes
 | Ry (Left Trigger) | PA4 | ADC1_IN4 | min=0, max=4095, reversed |
 | Rz (Right Trigger) | PA5 | ADC1_IN5 | min=0, max=4095, normal |
 
-#### Digital Buttons (Active Low with 10kΩ Pull-ups)
+#### Digital Buttons (Active Low, Internal Pull-ups)
 
 | Button | Pin | Bit |
 |--------|-----|-----|
@@ -67,6 +69,22 @@ It looks rough, it's been used hard, and the paint is worn — but it works. Tes
 | BTN10 | PB12 | 9 |
 | BTN11 | PB13 | 10 |
 | BTN12 | PB14 | 11 |
+
+---
+
+## Build Process
+
+This was built with zero budget using whatever was available in the workshop:
+
+| Material | Source |
+|----------|--------|
+| Body | Scrap wood from furniture (leftover pieces that would've gone into a bonfire) |
+| Paint | Leftover paint from the workshop — not bought for this project |
+| Tools | Large furniture tools — no precision crafting tools, no Dremel, no 3D printer |
+| Screws | Whatever was lying around |
+| Wire | Standard hookup wire |
+
+> **No fresh wood was purchased. No professional tools were used. No 3D printer.** The enclosure was carved and assembled by hand using basic workshop tools. The finish is rough because of the tools and materials available, not because of neglect or heavy use. This is a v1 functional prototype — the focus was on getting the electronics and firmware right. v2 will have a proper enclosure.
 
 ---
 
