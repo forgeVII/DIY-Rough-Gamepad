@@ -32,26 +32,27 @@ The electronics and firmware are the real focus here. The cosmetic finish is sec
 | Component | Qty | Description |
 |-----------|-----|-------------|
 | STM32F103C8T6 "Blue Pill" | 1 | Main MCU, 72MHz, 64KB Flash, 20KB RAM |
-| PS2 Joystick Module (KY-023) | 2 | Cheap/basic analog dual-axis potentiometers |
+| PS2 Joystick Module (KY-023) | 2 | Cheap/basic analog dual-axis potentiometers (thumbsticks) |
+| 10kΩ Trim Potentiometer | 2 | Mini pots used as analog shoulder triggers |
 | Tactile Push Buttons (6mm) | 12 | Momentary switches for digital inputs |
 | USB Connector | 1 | Micro-USB or USB-C (board dependent) |
 | ST-Link V2 | 1 | For flashing firmware |
 | Hookup Wire | - | For connections |
 
-> **Note:** Buttons use the STM32's internal pull-ups (no external resistors needed). Cheap PS2 joystick modules tend to drift — per-axis calibration in firmware fixes this.
+> **Note:** Buttons use the STM32's internal pull-ups (no external resistors needed). Cheap PS2 joystick modules and trim pots tend to drift — per-axis calibration in firmware fixes this.
 
 ### Pin Mapping
 
 #### Analog Axes (ADC1 - 12-bit, 0-4095)
 
-| Axis | Pin | Function | Calibration |
-|------|-----|----------|-------------|
-| X (Left Stick X) | PA0 | ADC1_IN0 | min=0, max=3095, reversed |
-| Y (Left Stick Y) | PA1 | ADC1_IN1 | min=0, max=2595, reversed |
-| Z (Right Stick X) | PA2 | ADC1_IN2 | min=0, max=4095, reversed |
-| Rx (Right Stick Y) | PA3 | ADC1_IN3 | min=0, max=4095, reversed |
-| Ry (Left Trigger) | PA4 | ADC1_IN4 | min=0, max=4095, reversed |
-| Rz (Right Trigger) | PA5 | ADC1_IN5 | min=0, max=4095, normal |
+| Axis | Pin | Source | Calibration |
+|------|-----|--------|-------------|
+| X (Left Stick X) | PA0 | PS2 Joystick | min=0, max=3095, reversed |
+| Y (Left Stick Y) | PA1 | PS2 Joystick | min=0, max=2595, reversed |
+| Z (Right Stick X) | PA2 | PS2 Joystick | min=0, max=4095, reversed |
+| Rx (Right Stick Y) | PA3 | PS2 Joystick | min=0, max=4095, reversed |
+| Ry (Left Trigger) | PA4 | 10k Trim Pot | min=0, max=4095, reversed |
+| Rz (Right Trigger) | PA5 | 10k Trim Pot | min=0, max=4095, normal |
 
 #### Digital Buttons (Active Low, Internal Pull-ups)
 
