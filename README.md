@@ -1,11 +1,12 @@
 # DIY Rough Gamepad
 
 ![Platform](https://img.shields.io/badge/Platform-STM32F103C8T6-blue)
-![Framework](https://img.shields.io/badge/Framework-STM32Cube-red)
+![Framework](https://img.shields.io/badge/Framework-STM32Cube+-red)
+![Framework](https://img.shields.io/badge/Framework-Arduino-orange)
 ![License](https://img.shields.io/badge/License-MIT-green)
 ![Version](https://img.shields.io/badge/Version-v1-orange)
 
-> A handmade USB HID gamepad and reusable test pad built from scratch using STM32F103C8T6 "Blue Pill", PS2 joystick modules, and 12 tactile buttons. Tested and working in real games.
+> A handmade USB HID gamepad and reusable test pad built from scratch using STM32F103C8T6 "Blue Pill", PS2 joystick modules, MPU6050 gyro/accel, and 12 tactile buttons. Tested and working in real games.
 
 ---
 
@@ -111,7 +112,9 @@ No external libraries needed — raw USB HID class, compatible with Windows/Linu
 
 ## Firmware
 
-### Build with PlatformIO
+### PlatformIO (Analog-Only)
+
+The original firmware built with PlatformIO using bare-metal STM32 HAL. Pure analog gamepad — 6 ADC axes + 12 buttons. MPU6050 I2C was attempted but failed due to STM32F103 hardware I2C bugs.
 
 ```bash
 # Clone the repo
@@ -130,32 +133,61 @@ pio run -t upload
 - [PlatformIO CLI](https://platformio.org/install/cli) or VS Code + PlatformIO Extension
 - ST-Link V2 programmer connected to the Blue Pill
 
-### Project Structure
+---
+
+### Arduino (MPU6050 Working)
+
+The Arduino approach uses Roger Clark's `Arduino_STM32` core with `USBComposite` library, which solves the MPU6050 I2C issue that plagued the HAL version. The Arduino `Wire` library handles I2C differently and works around the F103's hardware I2C bugs.
+
+#### Dependencies
+
+Install these in Arduino IDE:
+
+1. **Arduino_STM32** core — [Roger Clark's repo](https://github.com/rogerclarkhal/Arduino_STM32) or via Board Manager
+2. **USBComposite_for_STM32** library — [Arpruss repo](https://github.com/arpruss/USBComposite_for_STM32F1) (also bundled with Arduino_STM32)
+
+#### Three Variants
+
+| Variant | Folder | Focus | MPU | Analog Axes | Triggers | Yaw Reset |
+|---------|--------|-------|-----|-------------|----------|-----------|
+| **Original** | `arduino/original/` | Full gamepad — buttons, pots, MPU all on breadboard | X/Y/Z (yaw, pitch, roll) | 6 (all PA0-PA5) | Combined (single axis) | Yes (PB12+PB13+PB14) |
+| **v2** | `arduino/v2/` | Gyro/tilt-based games — yaw control priority | X/Y/Z (yaw, pitch, roll) | 3 (no right stick X) | Separate | Yes (PB12+PB13+PB14) |
+| **v3** | `arduino/v3/` | Simple pot/button games + tilt support | Roll + Pitch only | 6 (all PA0-PA5) | Separate | No |
+
+#### HID Report Layout (8 axes + 12 buttons + hat)
+
+| Axis | Original | v2 | v3 |
+|------|----------|----|----|
+| X | MPU Yaw | MPU Yaw | Left Stick X |
+| Y | MPU Pitch | MPU Pitch | Left Stick Y |
+| Z | MPU Roll | MPU Roll | Right Stick X |
+| Rx | Left Stick X | Left Stick X | Right Stick Y |
+| Ry | Left Stick Y | Left Stick Y | Left Trigger |
+| Rz | Right Stick X | Right Stick Y | Right Trigger |
+| Slider | Combined Trigger | Right Stick Y | MPU Roll |
+| Slider | Right Stick Y | Separate Trigger | MPU Pitch |
+
+#### Build
+
+1. Open the `.ino` file in Arduino IDE
+2. Select board: **Generic STM32F1 Series** → **BluePill F103C8**
+3. Upload via USB DFU or ST-Link
+
+```bash
+# Or via STM32CubeProgrammer CLI
+# Arduino IDE handles compilation and upload
+```
+
+#### Project Structure
 
 ```
-firmware/
-├── platformio.ini              # PlatformIO build configuration
-├── STM32F103C8TX_FLASH.ld     # Linker script
-├── src/
-│   ├── main.c                  # Main firmware — ADC, buttons, USB HID report
-│   ├── adc.c / adc.h          # ADC1 configuration (6 channels)
-│   ├── gpio.c / gpio.h        # GPIO configuration (12 button inputs)
-│   ├── i2c.c / i2c.h          # I2C1 configuration (reserved for v2)
-│   ├── usb_device.c            # USB device initialization
-│   ├── usbd_conf.c             # USB PMA buffer allocation
-│   ├── usbd_core.c             # USB core stack
-│   ├── usbd_ctlreq.c           # USB control requests
-│   ├── usbd_desc.c             # USB device descriptors
-│   ├── usbd_hid.c              # HID class — report descriptor + endpoints
-│   ├── usbd_ioreq.c            # USB I/O requests
-│   ├── stm32f1xx_hal_msp.c     # HAL MSP initialization
-│   ├── stm32f1xx_it.c          # Interrupt handlers
-│   ├── system_stm32f1xx.c      # System clock configuration
-│   ├── syscalls.c / sysmem.c   # Newlib stubs
-│   └── main.h                  # Main header
-└── include/
-    ├── *.h                     # All header files
-    └── stm32f1xx_hal_conf.h    # HAL configuration
+arduino/
+├── original/
+│   └── original.ino       # Full gamepad — MPU + 6 analog + combined trigger
+├── v2/
+│   └── v2.ino             # Gyro-focused — MPU + 3 analog + separate triggers
+└── v3/
+    └── v3.ino             # Pots + buttons + roll/pitch on sliders
 ```
 
 ---
@@ -173,6 +205,12 @@ firmware/
 
 ### Gameplay Testing
 [![Gameplay Testing](https://img.youtube.com/vi/NsDt_gfPhqs/0.jpg)](https://youtube.com/shorts/NsDt_gfPhqs)
+
+### MPU6050 Working in Processing
+> *Video coming soon — MPU6050 roll/pitch/yaw visualized in real-time 3D using Processing.*
+
+### MPU6050 Working in Games
+> *Video coming soon — MPU6050 gyro controlling game axes in real games via USB HID.*
 
 ## Photos
 
@@ -194,17 +232,11 @@ firmware/
 
 ## Known Issues
 
-### MPU6050 Gyro/Accel — Not Working (v1)
+### MPU6050 Gyro/Accel — Resolved via Arduino
 
-I attempted to add an MPU6050 (GY-521) gyro/accelerometer via I2C to add 6 more axes (accel X/Y/Z + gyro X/Y/Z). Despite extensive testing, **I2C communication consistently failed on this STM32F103 board**:
+The PlatformIO/HAL firmware could not communicate with the MPU6050 over I2C (known STM32F103 hardware bug). The Arduino approach using `Wire` library + `Arduino_STM32` core works around this — MPU6050 is now fully functional with roll, pitch, and yaw via adaptive complementary filter.
 
-- **Hardware I2C1 (PB6/PB7)** — Returned all zeros. Known silicon bug in STM32F103 I2C1 peripheral.
-- **Hardware I2C2 (PB10/PB11)** — Same result, pins occupied by buttons anyway.
-- **Software I2C (bit-bang)** — Returns stale data, values stuck at 1.
-- **Tested with** multiple initialization sequences (400kHz, 100kHz, full reset/wake cycle), DWT-accurate microsecond delays, and both address variants (0x68/0x69).
-- **Confirmed working** — Same MPU6050 module works perfectly on Arduino Nano with MPU6050_tockn library, so the hardware is fine.
-
-**Root cause**: Likely a combination of STM32F103 I2C hardware errata and missing external pull-up resistors (4.7kΩ) on the I2C bus. This will be fixed in v2.
+**Three Arduino variants** are available in `arduino/` — see [Arduino (MPU6050 Working)](#arduino-mpu6050-working) section above.
 
 ### Button Sensitivity
 
@@ -219,7 +251,7 @@ Version 2 will be a complete redesign using **ESP32-S3** with:
 | Feature | Status |
 |---------|--------|
 | ESP32-S3 with native USB HID | Planned |
-| MPU6050 gyro/accel working (I2C fix) | Planned |
+| MPU6050 gyro/accel working | Done (via Arduino approach on Blue Pill) |
 | Bluetooth gamepad mode | Planned |
 | Wireless 2.4GHz mode | Planned |
 | LiPo battery with charging | Planned |
