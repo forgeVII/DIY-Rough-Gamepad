@@ -221,6 +221,50 @@ arduino/
 
 ---
 
+## Calibration
+
+Axes can be calibrated in **3 ways**:
+
+### 1. Edit Values in Code (Recommended)
+
+Each axis has hardcoded min/max values in the firmware. Edit these directly in the `.ino` file to match your physical pot's range:
+
+```cpp
+// In the analog read section, adjust the >> shift or add min/max mapping
+// For example, if your pot reads 100-3800 instead of 0-4095:
+// val = map(val, 100, 3800, 0, 255);  // or 0-1023 for 10-bit
+```
+
+### 2. vJoy Configurator (Software Calibration)
+
+Use [vJoy](https://vjoystick.net/site/) to calibrate axes in software:
+1. Install vJoy and vJoy Conf
+2. Create a virtual device matching your axis/button count
+3. Map your physical gamepad to vJoy using **vJoyMapper** or **Universal Joystick Remapper**
+4. Calibrate each axis through vJoy's wizard
+
+### 3. External App (xoutput.exe, etc.)
+
+Use apps like **xoutput.exe** to map and calibrate:
+1. Open xoutput.exe
+2. Select your gamepad device
+3. Calibrate each axis — set deadzone, range, and direction
+4. Save profile — maps to an Xbox 360 controller that most games recognize
+
+> **Tip:** For quick testing, use [gamepad-tester.com](https://gamepad-tester.com/) in a browser — it shows all axes in real-time without installing anything.
+
+---
+
+## Yaw Reset (MPU Variants)
+
+MPU yaw drifts over time (no magnetometer to correct it). Use the **yaw reset combo** to recenter yaw to 0:
+
+**Press PB12 + PB13 + PB14 simultaneously** (3 buttons together) → yaw resets to center.
+
+> This works in **original** and **v2** variants only. v3 does not have yaw.
+
+---
+
 ## How It Works
 
 1. **ADC Reads** — 6 analog channels from PS2 joystick potentiometers read via12-bit ADC, calibrated per-axis for each physical pot's range
