@@ -185,6 +185,8 @@ void loop() {
 
     if ((btnMask & 0x0E00) == 0x0E00) {
         yaw = 0;
+        roll = 0;
+        pitch = 0;
     }
 
     gamepad.send();

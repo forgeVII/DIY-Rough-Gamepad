@@ -257,9 +257,9 @@ Use apps like **xoutput.exe** to map and calibrate:
 
 ## Yaw Reset (MPU Variants)
 
-MPU yaw drifts over time (no magnetometer to correct it). Use the **yaw reset combo** to recenter yaw to 0:
+MPU axes drift over time (no magnetometer to correct yaw). Use the **reset combo** to recenter all MPU axes to 0:
 
-**Press PB12 + PB13 + PB14 simultaneously** (3 buttons together) → yaw resets to center.
+**Press PB12 + PB13 + PB14 simultaneously** (3 buttons together) → yaw, roll, and pitch reset to center.
 
 > This works in **original** and **v2** variants only. v3 does not have yaw.
 
