@@ -207,10 +207,10 @@ arduino/
 [![Gameplay Testing](https://img.youtube.com/vi/NsDt_gfPhqs/0.jpg)](https://youtube.com/shorts/NsDt_gfPhqs)
 
 ### MPU6050 Working in Processing
-> *Video coming soon — MPU6050 roll/pitch/yaw visualized in real-time 3D using Processing.*
+[![MPU6050 Working in Processing](https://img.youtube.com/vi/iSkmEQlchrY/0.jpg)](https://youtu.be/iSkmEQlchrY)
 
 ### MPU6050 Working in Games
-> *Video coming soon — MPU6050 gyro controlling game axes in real games via USB HID.*
+[![MPU6050 Working in Games](https://img.youtube.com/vi/-UH7wJGvix4/0.jpg)](https://youtube.com/shorts/-UH7wJGvix4)
 
 ## Photos
 
