@@ -118,7 +118,7 @@ The original firmware built with PlatformIO using bare-metal STM32 HAL. Pure ana
 
 ```bash
 # Clone the repo
-git clone https://github.com/forgeVII-org/DIY-Rough-Gamepad.git
+git clone https://github.com/forgeVII/DIY-Rough-Gamepad.git
 cd DIY-Rough-Gamepad/firmware
 
 # Build
@@ -193,6 +193,9 @@ arduino/
 ---
 
 ## Videos
+
+### Gamepad Short
+[![Gamepad Short](https://img.youtube.com/vi/Is9FYDz0Uvc/0.jpg)](https://youtube.com/shorts/Is9FYDz0Uvc)
 
 ### Build Overview
 [![Build Overview](https://img.youtube.com/vi/Yqp5RxeJppQ/0.jpg)](https://youtu.be/Yqp5RxeJppQ)
